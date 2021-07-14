@@ -1,12 +1,19 @@
-<script type="ts">
-  import NumField from '../components/NumField.svelte'
-  import TextField from '../components/TextField.svelte'
+<script type="ts" context="module">
+  import { NumberRange } from '../lib/number-utils'
+</script>
 
-  export let poids = 0
-  export let taille = 0
+<script type="ts">
+  import RangeSlider from '../components/RangeSlider.svelte'
+
+  export let poids: number
 </script>
 
 <div class="flex flex-row">
-  <input type="range" min=0 max=10 >
+  <RangeSlider
+    bind:value={poids}
+    min={0}
+    max={10000}
+  />
 </div>
-Ceci est le composant de la taille et du poids
+
+<pre>{ JSON.stringify({ poids }) }</pre>
