@@ -1,0 +1,11 @@
+2021-07-21
+23:48-
+
+TODO: Display selected value on accordion ribbons
+TODO: Allow to define a maximum range gap for weight/size
+TODO: Collapse non selected accordion
+TODO: Adjust values for weight and size
+TODO: Show expected birthdate and offset with selected date
+TODO: Calendar ? Time selector ?
+TODO: Datagrid with results (or just CSV export)
+TODO: Minimalistic Mongo driven backend

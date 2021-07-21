@@ -22,6 +22,7 @@
     "svelte": "^3.0.0",
     "svelte-check": "^1.0.0",
     "svelte-preprocess": "^4.6.3",
+    "svelte-range-slider-pips": "^1.7.2",
     "tailwindcss": "^2.0.2",
     "tslib": "^2.0.0",
     "typescript": "^4.1.3"

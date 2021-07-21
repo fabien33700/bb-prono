@@ -5,7 +5,6 @@
   const labels = ['Premier', 'Deuxième', 'Troisième']
 </script>
 
-<h2>Prénoms :</h2>
 <div class="flex flex-row justify-between">
   {#each prenoms as prenom, i}
     <TextField
