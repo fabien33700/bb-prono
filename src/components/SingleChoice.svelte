@@ -11,7 +11,7 @@
   export let items: (TAcceptedItem)[] = []
   export let selected: TAcceptedItem = null
 
-  let position: number = 0
+  let position: number = items.indexOf(selected)
 
   let atBegin: boolean
   let atEnd: boolean
@@ -35,13 +35,10 @@
     empty = !items?.length
     atBegin = !empty && position === 0
     atEnd = !empty && position === items.length - 1
-    console.log({position, items, selected, atBegin, atEnd });
 
     displayedText = isChoiceItem(selected)
       ? selected?.title ?? selected?.value?.toString?.()
       : selected
-
-
   }
 </script>
 

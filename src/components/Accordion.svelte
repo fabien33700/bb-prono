@@ -1,18 +1,26 @@
 <script type="ts">
+  import { createEventDispatcher } from "svelte"
+
   /**
    * Indicated whether the accordion is expanded (content shown) or collasped
    */
   export let expanded = false
+
+  const dispatch = createEventDispatcher()
+
+  $: dispatch(expanded ? 'expand' : 'collapse')
 </script>
 
 <!-- Content -->
 <div class="w-full overflow-hidden border-t">
-  <label class="block p-5 cursor-pointer">
+  <label class="p-5 cursor-pointer flex flex-row items-center">
     <input class="absolute opacity-0" type="checkbox" bind:checked={expanded}>
     <slot name="title"></slot>
+    <span class="flex-1" />
+    <slot name="description"></slot>
     <div class="arrow" class:down={expanded} class:left={!expanded}></div>
   </label>
-  <div 
+  <div
     class="content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal"
     class:expanded={expanded}
   >
@@ -32,9 +40,10 @@
   }
   .content.expanded {
     max-height: 100vh;
+    transition: max-height .50s;
   }
   .arrow {
-    float: right;
+    margin-left: 25px;
     border-bottom: 1px solid #000;
     border-right: 1px solid #000;
     width: 8px;
@@ -47,5 +56,4 @@
   .arrow.left {
     transform: rotate(135deg);
   }
-
 </style>

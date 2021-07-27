@@ -1,11 +1,31 @@
-export function getNbreJour(mois: number, annee: number) {
-  if (mois + 1 === 2) {
-    const bissextile = ((annee % 4 === 0) && (annee % 100 !== 0)) || (annee % 400 === 0)
-    return bissextile ? 29 : 28
-  }
-  if ([1, 3, 5, 7, 8, 10, 12].includes(mois + 1)) return 31
-  return 30
+import { fr } from 'date-fns/locale'
+import { interval } from './number-utils'
+import {
+  getDaysInMonth as _getDaysInMonth,
+  format,
+  formatDistanceStrict,
+  isAfter,
+  isBefore,
+  differenceInDays,
+} from 'date-fns'
+
+export function getMonthsNames(): string[] {
+  return [...interval(0, 11)].map(m => fr.localize.month(m))
 }
 
-export const nomsMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-  'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+export function getCurrentYear(): number {
+  return new Date().getFullYear()
+}
+
+export function getDaysInMonth(month: number, year = getCurrentYear()) {
+  return _getDaysInMonth(new Date(year, month))
+}
+
+export function formatLongDate(date: Date): string {
+  return format(date, `EEEE d LLLL u`, { locale: fr })
+}
+
+export function formatLongDateTime(date: Date): string {
+  return format(date, `EEEE d LLLL u 'à' H'h'mm`, { locale: fr })
+}
+

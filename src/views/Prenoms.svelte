@@ -1,14 +1,25 @@
 <script type="ts">
-  import TextField from "../components/TextField.svelte"
+  import Accordion from '../components/Accordion.svelte'
+  import TextField from '../components/TextField.svelte'
 
-  export let prenoms = [null, null, null]
-  const labels = ['Premier', 'Deuxième', 'Troisième']
+  import { firstNames, selectedPage } from '../stores'
+
+  $firstNames = ['', '', '']
+  const pageIndex = 0
 </script>
 
-<div class="flex flex-row justify-between">
-  {#each prenoms as prenom, i}
+<Accordion
+  expanded={$selectedPage === pageIndex}
+  on:expand={() => $selectedPage = pageIndex}
+  >
+  <h1 slot="title">💬 Prénoms</h1>
+  <h2 slot="description" class="text-sm italic text-gray-500">{@html $firstNames.filter(n => n).join(', ')}</h2>
+  <div class="flex flex-row justify-between">
+  {#each $firstNames as firstName, i}
     <TextField
-      placeholder="{labels[i]} prono"
-      bind:value={prenom} />
+      placeholder="{i+1}{(i == 0 ? 'ère' : 'ème')} proposition"
+      bind:value={firstName} />
   {/each}
 </div>
+</Accordion>
+
