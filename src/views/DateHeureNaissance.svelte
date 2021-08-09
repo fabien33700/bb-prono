@@ -7,14 +7,18 @@
     getDaysInMonth,
     getMonthsNames,
   } from '../lib/date-utils'
+  import { differenceInCalendarDays } from 'date-fns'
+  import { formatTermDistance } from '../lib/format-utils'
+
+  // Types
   import type { Range } from '../lib/number-utils'
-  import { differenceInCalendarDays, differenceInDays } from 'date-fns'
 
   // Components
   import RangeSlider from 'svelte-range-slider-pips'
   import Accordion from '../components/Accordion.svelte'
   import NumField from '../components/NumField.svelte'
   import SingleChoice from '../components/SingleChoice.svelte'
+  import BlockOverlay from '../components/BlockOverlay.svelte'
 
   // Stores
   import { birthDateTime, selectedPage } from '../stores'
@@ -22,6 +26,8 @@
   // Settings
   const pageIndex = 1
   const dateOfTerm = new Date(2021, 8, 11)
+  const termDistMin = -20
+  const termDistMax = +20
 
   // Internal states & properties
   const monthsNames = getMonthsNames()
@@ -31,7 +37,18 @@
   let hours = 0
   let minutes = 0
   let daysInMonth: number
-  console.log(monthsNames, month)
+  const sliderOpts = {
+    id: 'termGap',
+    min: termDistMin,
+    max: termDistMax,
+    step: 1,
+    all: 'label',
+    range: true,
+    pips: true,
+    pipstep: 1,
+    float: true,
+    formatter: labelDistanceFormatter,
+  }
 
   // Reactive state
   $: monthNo = monthsNames.indexOf(month)
@@ -40,16 +57,17 @@
   $: termDistance = differenceInCalendarDays($birthDateTime, dateOfTerm)
   $: console.log(getDistanceRange(termDistance))
 
-  function formatTermDistance(distance: number): string {
-    const s = Math.abs(distance) > 1 ? 's' : ''
-
-    if (distance > 0) return `${Math.abs(distance)} jour${s} après le terme`
-    else if (distance < 0) return `${Math.abs(distance)} jour${s} avant le terme`
-    else return `le jour du terme`
+  function getDistanceRange(distance: number): Range {
+    return [...[0, distance].sort()] as Range
   }
 
-  function getDistanceRange(distance: number): Range {
-    return [...[50, 50 + distance].sort()] as Range
+  function labelDistanceFormatter(distance: number): string {
+    if (distance === termDistMin) return 'Avant terme'
+    if (distance === termDistMax) return 'Après terme'
+    if (distance === 0) return 'Terme'
+    if (distance % 5 === 0) return `${Math.abs(distance)}j`
+
+    return ''
   }
 
 </script>
@@ -84,7 +102,7 @@
     />
   </div>
 
-  <div class="flex flex-row items-center">
+  <div class="flex flex-row items-center mb-5">
     <!-- Heure -->
     <h3 class="mt-2">Heure</h3>
     <NumField
@@ -110,25 +128,23 @@
     Naissance prévue <strong>{ formatTermDistance(termDistance) }</strong>
   </div>
 
-  <RangeSlider
-    id="termGap"
-    min="0"
-    max="100"
-    values={getDistanceRange(termDistance)}
-    step="1"
-    all="label"
-    range
-    pips
-    pipstep="5"
-    float
-    formatter={(v) => getDistanceRange(v) }
-  />
+  <div class="mb-5">
+    <BlockOverlay>
+      <RangeSlider
+        values={getDistanceRange(termDistance)}
+        {...sliderOpts}
+      />
+    </BlockOverlay>
+  </div>
 
 </Accordion>
 
 <style lang="postcss">
   :global(#termGap.rangeSlider > .rangeHandle) {
-    display: none
+    display: none;
+  }
+  :global(#termGap.rangeSlider > .rangePips > .pip > .pipVal) {
+    @apply text-xs;
   }
 </style>
 
