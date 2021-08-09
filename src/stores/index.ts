@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import type { Range } from '../lib/number-utils'
+import type { Range } from '../lib/NumberUtils'
 
 export const selectedPage = writable(0)
 

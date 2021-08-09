@@ -3,10 +3,10 @@
   import RangeSlider from 'svelte-range-slider-pips'
   import Accordion from '../components/Accordion.svelte'
 
-  // Librairies
-  import type { Range } from '../lib/number-utils'
-  import { formatNumber, round } from '../lib/number-utils'
-  import { formatWeight, formatWeightRange } from '../lib/format-utils'
+  // Libraries
+  import type { Range } from '../lib/NumberUtils'
+  import { formatNumber, round } from '../lib/NumberUtils'
+  import { formatWeight, formatWeightRange } from '../lib/FormatUtils'
 
   // Stores
   import { weight, selectedPage } from '../stores'

@@ -1,35 +1,51 @@
 <script type="ts">
+  // Properties
+  /**
+   * The current number value
+   */
   export let value: number
-  export let width: string = ''
 
-  export let min = 0
+  /**
+   * The width of the input element
+   */
+  export let width = ''
+
+  /**
+   * The minimum value
+   */
+  export let min = -Infinity
+
+  /**
+   * The maximum value
+   */
   export let max = +Infinity
 
+  // Event handlers
   const increment = () => value += 1
   const decrement = () => value -= 1
 
+  /**
+   * Prevent user from typing non numeric caracter in input
+   * @param e The key event
+   */
   function keyPressHandler(e: KeyboardEvent) {
     const digits = Array.from('0123456789')
-    if (!digits.includes(e.key)) 
+    if (!digits.includes(e.key))
       e.preventDefault()
   }
 
-  function applyBounds() {
+  // Ensure that the current number value is between min and max
+  $: {
     if (value > max) value = max
     if (value < min) value = min
   }
-
-  // Ensure to apply bounds if max changes.
-  // In Svelte, it's important that the variable to react to changes appears in the code blocks
-  $: max && applyBounds()
 </script>
 
 <div class="block">
   <div class="flex flex-row justify-around text-gray-700 bg-white font-bold text-xl mb-2 m-5 text-center shadow appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
     <button disabled="{value <= min}" on:click={decrement}>&minus;</button>
-    <input 
+    <input
       on:keypress={keyPressHandler}
-      on:change={applyBounds}
       style="width: {width}"
       type="number" {min} {max} bind:value={value}>
     <button disabled="{value >= max}" on:click={increment}>&plus;</button>

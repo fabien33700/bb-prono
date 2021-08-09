@@ -1,23 +1,21 @@
-<script type="ts" context="module">
-  export interface ChoiceItem {
-    title?: string
-    value: any
-  }
-
-  export declare type TAcceptedItem = ChoiceItem | string
-</script>
-
 <script type="ts">
-  export let items: (TAcceptedItem)[] = []
-  export let selected: TAcceptedItem = null
+  // Properties
 
+  /**
+   * The array containing all the items
+   */
+  export let items: string[] = []
+
+  /**
+   * The selected item
+   */
+  export let selected: string = null
+
+  // Internal state
   let position: number = items.indexOf(selected)
-
+  let empty: boolean
   let atBegin: boolean
   let atEnd: boolean
-  let empty: boolean
-
-  let displayedText: string
 
   function nextItem() {
     if (!atEnd) selected = items[++position]
@@ -27,18 +25,11 @@
     if (!atBegin) selected = items[--position]
   }
 
-  function isChoiceItem(item: TAcceptedItem): item is ChoiceItem {
-    return (item as ChoiceItem).value !== undefined;
-  }
-
+  // Reactive state
   $: {
     empty = !items?.length
     atBegin = !empty && position === 0
     atEnd = !empty && position === items.length - 1
-
-    displayedText = isChoiceItem(selected)
-      ? selected?.title ?? selected?.value?.toString?.()
-      : selected
   }
 </script>
 
@@ -47,7 +38,7 @@
     <button disabled="{atBegin}" on:click={previousItem}>&lt;</button>
     <input
       readonly
-      type="text" value={displayedText} />
+      type="text" value={selected} />
     <button disabled="{atEnd}" on:click={nextItem}>&gt;</button>
   </div>
 </div>

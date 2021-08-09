@@ -8,6 +8,7 @@
 
   const dispatch = createEventDispatcher()
 
+  // Fires expand/collapse event on expanded state changes
   $: dispatch(expanded ? 'expand' : 'collapse')
 </script>
 

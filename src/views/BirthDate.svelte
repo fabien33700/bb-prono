@@ -6,12 +6,12 @@
     getCurrentYear,
     getDaysInMonth,
     getMonthsNames,
-  } from '../lib/date-utils'
+  } from '../lib/DateUtils'
   import { differenceInCalendarDays } from 'date-fns'
-  import { formatTermDistance } from '../lib/format-utils'
+  import { formatTermDistance } from '../lib/FormatUtils'
 
   // Types
-  import type { Range } from '../lib/number-utils'
+  import type { Range } from '../lib/NumberUtils'
 
   // Components
   import RangeSlider from 'svelte-range-slider-pips'
@@ -37,6 +37,7 @@
   let hours = 0
   let minutes = 0
   let daysInMonth: number
+
   const sliderOpts = {
     id: 'termGap',
     min: termDistMin,

@@ -3,9 +3,9 @@
   import RangeSlider from 'svelte-range-slider-pips'
   import Accordion from '../components/Accordion.svelte'
 
-  // Librairies
-  import { formatSizeRange } from '../lib/format-utils'
-  import type { Range } from '../lib/number-utils'
+  // Libraries
+  import { formatSizeRange } from '../lib/FormatUtils'
+  import type { Range } from '../lib/NumberUtils'
 
   // Stores
   import { size, selectedPage } from '../stores'
