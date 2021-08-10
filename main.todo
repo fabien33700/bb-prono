@@ -1,18 +1,19 @@
 2021-07-21
 23:48-
 
-TODO: Translate code in English
-TODO: JSDoc and comment
-TODO: Rename components and filenames
+TODO: Translate code in English Done
+TODO: JSDoc and comment Done
+TODO: Rename components and filenames Done
 TODO: Show a timeline for showing gap for dates Done
 TODO: Collapse non selected accordion Done
-TODO: Make weight and size slider more generic
-TODO: Say a word component
-TODO: Integrate date library Done (date-fns, dayjs KO)
+TODO: Make weight and size slider more generic Not
+TODO: Say a word component D
+TODO: Integrate date library Done
 TODO: Display selected value on accordion ribbons Done
 TODO: Allow to define a maximum range gap for weight/size Done
 TODO: Adjust values for weight and size Done
 TODO: Show expected birthdate and offset with selected date Done
-TODO: Calendar ? Time selector ?
+TODO: Calendar ? Time selector ? Not
+
 TODO: Datagrid with results (or just CSV export)
 TODO: Minimalistic Mongo driven backend

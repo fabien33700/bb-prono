@@ -12,13 +12,17 @@
   import { weight, selectedPage } from '../stores'
 
   // Default values and settings
-  const pageIndex = 2
-  const weightBounds: Range = [2500, 4500]
-  const maximumRange: number = 500
+  const PageIndex = 2
+  import {
+    MinWeight,
+    MaxWeight,
+    MaxWeightRange,
+  } from '../config'
+
 
   const sliderOpts = {
-    min: weightBounds[0],
-    max: weightBounds[1],
+    min: MinWeight,
+    max: MaxWeight,
     range: true,
     step: 25,
     float: true,
@@ -29,23 +33,23 @@
     handleFormatter: formatWeight,
   }
 
-  const middle = weightBounds[0] + (weightBounds[1] - weightBounds[0]) / 2
+  const middle = MinWeight + (MaxWeight - MinWeight) / 2
   // Internal state
   $weight = [
-    middle - (maximumRange / 2),
-    middle + (maximumRange / 2),
+    middle - (MaxWeightRange / 2),
+    middle + (MaxWeightRange / 2),
   ]
 
   // Reactive state
-  $: valid = !maximumRange || ($weight[1] - $weight[0] <= maximumRange)
+  $: valid = !MaxWeightRange || ($weight[1] - $weight[0] <= MaxWeightRange)
   $: lightColor = valid ? 'hsl(134, 61%, 50%)' : 'hsl(0, 61%, 50%)'
   $: darkColor = valid ? 'hsl(134, 61%, 35%)' : 'hsl(0, 61%, 35%)'
 
 </script>
 
 <Accordion
-  expanded={$selectedPage === pageIndex}
-  on:expand={() => $selectedPage = pageIndex}
+  expanded={$selectedPage === PageIndex}
+  on:expand={() => $selectedPage = PageIndex}
   >
   <h1 slot="title">⚖️ Poids</h1>
   <h2 slot="description" class="text-sm italic text-gray-500">{@html formatWeightRange($weight)}</h2>
@@ -61,8 +65,8 @@
   </div>
 
   {#if (!valid)}
-  <div class="text-red-700 italic text-sm">
-    ⚠️ La fourchette de poids ne peut pas excéder {formatWeight(maximumRange)}.
+  <div class="text-red-700 text-sm">
+    ⚠️ <em>La fourchette de poids ne peut pas excéder {formatWeight(MaxWeightRange)}.</em>
   </div>
   {/if}
 </Accordion>

@@ -11,13 +11,12 @@
   import { size, selectedPage } from '../stores'
 
   // Default values and settings
-  const pageIndex = 3
-  const sizeBounds: Range = [40, 60]
-  const maximumRange: number = 2
+  const PageIndex = 3
+  import { MaxSize, MaxSizeRange, MinSize } from '../config'
 
   const sliderOpts = {
-    min: sizeBounds [0],
-    max: sizeBounds[1],
+    min: MinSize,
+    max: MaxSize,
     range: true,
     step: 1,
     float: true,
@@ -28,23 +27,23 @@
     handleFormatter: (v: number) => `${v} cm`,
   }
 
-  const middle = sizeBounds[0] + (sizeBounds[1] - sizeBounds[0]) / 2
+  const middle = MinSize + (MaxSize - MinSize) / 2
   // Internal state
   $size = [
-    middle - (maximumRange / 2),
-    middle + (maximumRange / 2),
+    middle - (MaxSizeRange / 2),
+    middle + (MaxSizeRange / 2),
   ]
 
   // Reactive state
-  $: valid = !maximumRange || ($size[1] - $size[0] <= maximumRange)
+  $: valid = !MaxSizeRange || ($size[1] - $size[0] <= MaxSizeRange)
   $: lightColor = valid ? 'hsl(134, 61%, 50%)' : 'hsl(0, 61%, 50%)'
   $: darkColor = valid ? 'hsl(134, 61%, 35%)' : 'hsl(0, 61%, 35%)'
 
 </script>
 
 <Accordion
-  expanded={$selectedPage === pageIndex}
-  on:expand={() => $selectedPage = pageIndex}
+  expanded={$selectedPage === PageIndex}
+  on:expand={() => $selectedPage = PageIndex}
   >
   <h1 slot="title">📏 Taille</h1>
   <h2 slot="description" class="text-sm italic text-gray-500">{@html formatSizeRange($size)}</h2>
@@ -60,8 +59,8 @@
   </div>
 
   {#if (!valid)}
-  <div class="text-red-700 italic text-sm">
-    ⚠️ La fourchette de taille ne peut pas excéder {maximumRange} cm.
+  <div class="text-red-700 text-sm">
+    ⚠️ <em>La fourchette de taille ne peut pas excéder {MaxSizeRange} cm.</em>
   </div>
   {/if}
 </Accordion>

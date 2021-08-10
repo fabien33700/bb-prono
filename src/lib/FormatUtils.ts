@@ -1,3 +1,4 @@
+// Type usage
 import type { Range } from './NumberUtils'
 
 /**
@@ -15,7 +16,7 @@ const capitalize = (s: string) => (s && s.charAt(0).toUpperCase() + s.slice(1)) 
  * @param s the string
  * @returns true if the string is non null, non empty and not whitespaces only, false otherwise
  */
-const nonEmptyOrWhitespace = (s: string) => s?.trim?.()
+export const nonEmptyOrWhitespace = (s: string) => s?.trim?.()
 
 /**
  * Joins string pieces into a single string, using a glue substring.

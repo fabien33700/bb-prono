@@ -9,15 +9,16 @@
   // Stores
   import { firstNames, selectedPage } from '../stores'
 
+  const PageIndex = 0
+
   $firstNames = ['', '', '']
-  const pageIndex = 0
 </script>
 
 <Accordion
-  expanded={$selectedPage === pageIndex}
-  on:expand={() => $selectedPage = pageIndex}
+  expanded={$selectedPage === PageIndex}
+  on:expand={() => $selectedPage = PageIndex}
   >
-  <h1 slot="title">💬 Prénoms</h1>
+  <h1 slot="title">👤 Prénoms</h1>
   <h2 slot="description" class="text-sm italic text-gray-500">{@html formatFirstNames($firstNames)}</h2>
   <div class="flex flex-row justify-between">
     {#each $firstNames as firstName, i}

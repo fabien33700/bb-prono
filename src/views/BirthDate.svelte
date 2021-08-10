@@ -23,25 +23,24 @@
   // Stores
   import { birthDateTime, selectedPage } from '../stores'
 
-  // Settings
-  const pageIndex = 1
-  const dateOfTerm = new Date(2021, 8, 11)
-  const termDistMin = -20
-  const termDistMax = +20
+  // Default values and settings
+  const PageIndex = 1
+  import { DateOfTerm, MinTermDistance, MaxTermDistance } from '../config'
+
 
   // Internal states & properties
   const monthsNames = getMonthsNames()
-  let day = dateOfTerm.getDate()
-  let month: string = monthsNames[dateOfTerm.getMonth()]
-  let year = dateOfTerm.getFullYear()
+  let day = DateOfTerm.getDate()
+  let month: string = monthsNames[DateOfTerm.getMonth()]
+  let year = DateOfTerm.getFullYear()
   let hours = 0
   let minutes = 0
   let daysInMonth: number
 
   const sliderOpts = {
     id: 'termGap',
-    min: termDistMin,
-    max: termDistMax,
+    min: MinTermDistance,
+    max: MaxTermDistance,
     step: 1,
     all: 'label',
     range: true,
@@ -54,17 +53,16 @@
   // Reactive state
   $: monthNo = monthsNames.indexOf(month)
   $: daysInMonth = getDaysInMonth(monthNo)
+  $: termDistance = differenceInCalendarDays($birthDateTime, DateOfTerm)
   $: $birthDateTime = new Date(year, monthNo, day, hours, minutes)
-  $: termDistance = differenceInCalendarDays($birthDateTime, dateOfTerm)
-  $: console.log(getDistanceRange(termDistance))
 
   function getDistanceRange(distance: number): Range {
     return [...[0, distance].sort()] as Range
   }
 
   function labelDistanceFormatter(distance: number): string {
-    if (distance === termDistMin) return 'Avant terme'
-    if (distance === termDistMax) return 'Après terme'
+    if (distance === MinTermDistance) return 'Avant terme'
+    if (distance === MaxTermDistance) return 'Après terme'
     if (distance === 0) return 'Terme'
     if (distance % 5 === 0) return `${Math.abs(distance)}j`
 
@@ -74,8 +72,8 @@
 </script>
 
 <Accordion
-  expanded={$selectedPage === pageIndex}
-  on:expand={() => $selectedPage = pageIndex}
+  expanded={$selectedPage === PageIndex}
+  on:expand={() => $selectedPage = PageIndex}
   >
   <h1 slot="title">📆 Date & Heure de naissance</h1>
   <h2 slot="description" class="text-sm italic text-gray-500">{@html formatLongDateTime($birthDateTime)}</h2>
@@ -123,13 +121,13 @@
   </div>
 
   <div>
-    Date du terme prévu : <em>{ formatLongDate(dateOfTerm) }</em>
+    Date du terme prévu : <em>{ formatLongDate(DateOfTerm) }</em>
   </div>
   <div>
     Naissance prévue <strong>{ formatTermDistance(termDistance) }</strong>
   </div>
 
-  <div class="mb-5">
+  <div class="m-5">
     <BlockOverlay>
       <RangeSlider
         values={getDistanceRange(termDistance)}
