@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import css from "rollup-plugin-css-only";
+import alias from "@rollup/plugin-alias";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -43,6 +44,16 @@ export default {
     file: "public/build/bundle.js",
   },
   plugins: [
+    alias({
+      resolve: ['.svelte', '.ts', '.js'],
+      entries: [
+        { find: 'components', replacement: 'src/components' },
+        { find: 'lib', replacement: 'src/lib' },
+        { find: 'stores', replacement: 'src/stores' },
+        { find: 'config', replacement: 'src/config.ts' },
+        { find: 'views', replacement: 'src/views' },
+      ],
+    }),
     svelte({
       // add postcss config with tailwind
       preprocess: sveltePreprocess({

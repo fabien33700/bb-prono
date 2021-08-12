@@ -6,26 +6,26 @@
     getCurrentYear,
     getDaysInMonth,
     getMonthsNames,
-  } from '../lib/DateUtils'
+  } from 'lib/DateUtils'
   import { differenceInCalendarDays } from 'date-fns'
-  import { formatTermDistance } from '../lib/FormatUtils'
+  import { formatTermDistance } from 'lib/FormatUtils'
 
   // Types
-  import type { Range } from '../lib/NumberUtils'
+  import type { Range } from 'lib/NumberUtils'
 
   // Components
   import RangeSlider from 'svelte-range-slider-pips'
-  import Accordion from '../components/Accordion.svelte'
-  import NumField from '../components/NumField.svelte'
-  import SingleChoice from '../components/SingleChoice.svelte'
-  import BlockOverlay from '../components/BlockOverlay.svelte'
+  import Accordion from 'components/Accordion.svelte'
+  import NumField from 'components/NumField.svelte'
+  import SingleChoice from 'components/SingleChoice.svelte'
+  import BlockOverlay from 'components/BlockOverlay.svelte'
 
   // Stores
-  import { birthDateTime, selectedPage } from '../stores'
+  import { birthDateTime, selectedPage } from 'stores/index'
 
   // Default values and settings
   const PageIndex = 1
-  import { DateOfTerm, MinTermDistance, MaxTermDistance } from '../config'
+  import { DateOfTerm, MinTermDistance, MaxTermDistance } from 'config'
 
 
   // Internal states & properties

@@ -1,13 +1,13 @@
 <script type="ts">
   // Components
-  import Accordion from '../components/Accordion.svelte'
-  import TextField from '../components/TextField.svelte'
+  import Accordion from 'components/Accordion.svelte'
+  import TextField from 'components/TextField.svelte'
 
   // Libraries
-  import { formatFirstNames } from '../lib/FormatUtils';
+  import { formatFirstNames } from 'lib/FormatUtils';
 
   // Stores
-  import { firstNames, selectedPage } from '../stores'
+  import { firstNames, selectedPage } from 'stores/index'
 
   const PageIndex = 0
 

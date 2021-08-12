@@ -1,19 +1,18 @@
 <script lang="ts">
   // Views
-  import FirstNamesView from './views/FirstNames.svelte'
-  import BirthDateView from './views/BirthDate.svelte'
-  import SizeView from './views/Size.svelte'
-  import WeightView from './views/Weight.svelte'
-  import LeaveMessageView from './views/LeaveMessage.svelte'
+  import FirstNames from 'views/MainForm/FirstNames.svelte'
+  import BirthDate from 'views/MainForm/BirthDate.svelte'
+  import Size from 'views/MainForm/Size.svelte'
+  import Weight from 'views/MainForm/Weight.svelte'
+  import LeaveMessage from 'views/MainForm/LeaveMessage.svelte'
 
-  // Stores
-  import { snapshot } from './stores'
+  import { snapshot } from 'stores/index'
 
   // Internal state
   let submitted = false
   let promise: Promise<void> = Promise.resolve()
 
-  const wait = (delay) => new Promise(resolve => setTimeout(resolve, delay))
+  const wait = (delay: number) => new Promise(resolve => setTimeout(resolve, delay))
 
   async function sendResults(): Promise<void> {
     const results = { ...snapshot(), submitDate: new Date() }
@@ -33,11 +32,11 @@
 </script>
 
 <div class="shadow-md">
-  <FirstNamesView />
-  <BirthDateView />
-  <WeightView />
-  <SizeView />
-  <LeaveMessageView />
+  <FirstNames />
+  <BirthDate />
+  <Weight />
+  <Size />
+  <LeaveMessage />
 
   <div class="w-full border-t text-right p-2">
     {#await promise}

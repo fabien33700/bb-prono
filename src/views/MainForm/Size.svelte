@@ -1,18 +1,17 @@
 <script type="ts">
   // Components
   import RangeSlider from 'svelte-range-slider-pips'
-  import Accordion from '../components/Accordion.svelte'
+  import Accordion from 'components/Accordion.svelte'
 
   // Libraries
-  import { formatSizeRange } from '../lib/FormatUtils'
-  import type { Range } from '../lib/NumberUtils'
+  import { formatSizeRange } from 'lib/FormatUtils'
 
   // Stores
-  import { size, selectedPage } from '../stores'
+  import { size, selectedPage } from 'stores/index'
 
   // Default values and settings
   const PageIndex = 3
-  import { MaxSize, MaxSizeRange, MinSize } from '../config'
+  import { MaxSize, MaxSizeRange, MinSize } from 'config'
 
   const sliderOpts = {
     min: MinSize,

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Tailwind from './Tailwind.svelte'
-  import MainForm from './MainForm.svelte'
+  import MainForm from 'views/MainForm.svelte'
 </script>
 
 <Tailwind/>

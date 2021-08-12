@@ -1,15 +1,15 @@
 <script>
   // Components
-  import Accordion from '../components/Accordion.svelte'
-  import MarkedText from '../components/MarkedText.svelte'
-  import TextField from '../components/TextField.svelte'
+  import Accordion from 'components/Accordion.svelte'
+  import MarkedText from 'components/MarkedText.svelte'
+  import TextField from 'components/TextField.svelte'
 
   // Stores
-  import { messageText, author, selectedPage } from '../stores'
+  import { messageText, author, selectedPage } from 'stores/index'
 
   // Default values and settings
   const PageIndex = 4
-  import { MaxTextLength } from '../config'
+  import { MaxTextLength } from 'config'
 
   // Initializing store values
   $messageText ??= ''

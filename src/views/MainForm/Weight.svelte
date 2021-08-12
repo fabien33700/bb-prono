@@ -1,15 +1,14 @@
 <script type="ts">
   // Components
   import RangeSlider from 'svelte-range-slider-pips'
-  import Accordion from '../components/Accordion.svelte'
+  import Accordion from 'components/Accordion.svelte'
 
   // Libraries
-  import type { Range } from '../lib/NumberUtils'
-  import { formatNumber, round } from '../lib/NumberUtils'
-  import { formatWeight, formatWeightRange } from '../lib/FormatUtils'
+  import { formatNumber, round } from 'lib/NumberUtils'
+  import { formatWeight, formatWeightRange } from 'lib/FormatUtils'
 
   // Stores
-  import { weight, selectedPage } from '../stores'
+  import { weight, selectedPage } from 'stores/index'
 
   // Default values and settings
   const PageIndex = 2
@@ -17,8 +16,7 @@
     MinWeight,
     MaxWeight,
     MaxWeightRange,
-  } from '../config'
-
+  } from 'config'
 
   const sliderOpts = {
     min: MinWeight,

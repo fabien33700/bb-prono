@@ -8,7 +8,7 @@
   import marked from 'marked'
 
   // Libraries
-  import { nonEmptyOrWhitespace } from '../lib/FormatUtils'
+  import { nonEmptyOrWhitespace } from 'lib/FormatUtils'
 
   /* Properties */
 

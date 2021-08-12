@@ -1,5 +1,5 @@
 import { Readable, writable } from 'svelte/store'
-import type { Range } from '../lib/NumberUtils'
+import type { Range } from 'lib/NumberUtils'
 
 /**
  * Store for current selected page
