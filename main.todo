@@ -14,6 +14,11 @@ TODO: Allow to define a maximum range gap for weight/size Done
 TODO: Adjust values for weight and size Done
 TODO: Show expected birthdate and offset with selected date Done
 TODO: Calendar ? Time selector ? Not
+TODO: Datagrid with results (or just CSV export) Done
+TODO: Minimalistic Mongo driven backend Done
 
-TODO: Datagrid with results (or just CSV export)
-TODO: Minimalistic Mongo driven backend
+2021-08-13
+15:52-
+
+TODO: Inserting new prognostics via backend
+TODO: Modifying (with a unique url)

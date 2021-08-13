@@ -4,8 +4,9 @@
   "scripts": {
     "build": "NODE_ENV=production rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public",
-    "validate": "svelte-check"
+    "start": "sirv public --single",
+    "validate": "svelte-check",
+    "server": "nodemon server/"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.5",
@@ -14,11 +15,14 @@
     "@rollup/plugin-typescript": "^8.1.0",
     "@tsconfig/svelte": "^1.0.0",
     "autoprefixer": "^10.2.3",
+    "axios": "^0.21.1",
     "date-fns": "^2.23.0",
     "marked": "^2.1.3",
+    "nodemon": "^2.0.12",
     "postcss": "^8.2.4",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-dev": "^1.1.3",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
@@ -26,11 +30,15 @@
     "svelte-check": "^1.0.0",
     "svelte-preprocess": "^4.6.3",
     "svelte-range-slider-pips": "^1.7.2",
+    "svelte-routing": "^1.6.0",
     "tailwindcss": "^2.0.2",
     "tslib": "^2.0.0",
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7",
+    "morgan": "^1.10.0",
     "sirv-cli": "^1.0.0"
   }
 }

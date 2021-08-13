@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { Link } from 'svelte-routing'
+
   // Views
   import FirstNames from 'views/MainForm/FirstNames.svelte'
   import BirthDate from 'views/MainForm/BirthDate.svelte'
@@ -6,7 +8,7 @@
   import Weight from 'views/MainForm/Weight.svelte'
   import LeaveMessage from 'views/MainForm/LeaveMessage.svelte'
 
-  import { snapshot } from 'stores/index'
+  import { snapshot } from 'src/stores'
 
   // Internal state
   let submitted = false
@@ -38,17 +40,25 @@
   <Size />
   <LeaveMessage />
 
-  <div class="w-full border-t text-right p-2">
-    {#await promise}
-    <button disabled class="primary">
-      ⏳ En cours ...
-    </button>
-    {:then}
-    <button class="success" disabled={submitted}
-      on:click={() => submitForm()}>
-      Envoyer pronostic
-    </button>
-    {/await}
+  <div class="w-full border-t p-2 flex flex-row">
+    <div>
+      <button class="primary">
+        <Link to="/results">Afficher les résultats</Link>
+      </button>
+    </div>
+    <div class="flex-1" />
+    <div>
+      {#await promise}
+      <button disabled class="primary">
+        ⏳ En cours ...
+      </button>
+      {:then}
+      <button class="success" disabled={submitted}
+        on:click={() => submitForm()}>
+        Envoyer pronostic
+      </button>
+      {/await}
+    </div>
   </div>
 </div>
 

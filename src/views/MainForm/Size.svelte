@@ -7,11 +7,11 @@
   import { formatSizeRange } from 'lib/FormatUtils'
 
   // Stores
-  import { size, selectedPage } from 'stores/index'
+  import { size, selectedPage } from 'src/stores'
 
   // Default values and settings
   const PageIndex = 3
-  import { MaxSize, MaxSizeRange, MinSize } from 'config'
+  import { MaxSize, MaxSizeRange, MinSize } from 'src/config'
 
   const sliderOpts = {
     min: MinSize,

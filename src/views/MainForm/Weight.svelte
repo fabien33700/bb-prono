@@ -8,7 +8,7 @@
   import { formatWeight, formatWeightRange } from 'lib/FormatUtils'
 
   // Stores
-  import { weight, selectedPage } from 'stores/index'
+  import { weight, selectedPage } from 'src/stores'
 
   // Default values and settings
   const PageIndex = 2
@@ -16,7 +16,7 @@
     MinWeight,
     MaxWeight,
     MaxWeightRange,
-  } from 'config'
+  } from 'src/config'
 
   const sliderOpts = {
     min: MinWeight,

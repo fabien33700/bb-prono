@@ -1,12 +1,14 @@
-import svelte from "rollup-plugin-svelte";
-import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
-import livereload from "rollup-plugin-livereload";
-import { terser } from "rollup-plugin-terser";
-import sveltePreprocess from "svelte-preprocess";
-import typescript from "@rollup/plugin-typescript";
-import css from "rollup-plugin-css-only";
-import alias from "@rollup/plugin-alias";
+import svelte from 'rollup-plugin-svelte'
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import livereload from 'rollup-plugin-livereload'
+import { terser } from 'rollup-plugin-terser'
+import sveltePreprocess from 'svelte-preprocess'
+import typescript from '@rollup/plugin-typescript'
+import css from 'rollup-plugin-css-only'
+import alias from '@rollup/plugin-alias'
+import dev from 'rollup-plugin-dev'
+
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -49,8 +51,6 @@ export default {
       entries: [
         { find: 'components', replacement: 'src/components' },
         { find: 'lib', replacement: 'src/lib' },
-        { find: 'stores', replacement: 'src/stores' },
-        { find: 'config', replacement: 'src/config.ts' },
         { find: 'views', replacement: 'src/views' },
       ],
     }),
@@ -58,14 +58,19 @@ export default {
       // add postcss config with tailwind
       preprocess: sveltePreprocess({
         postcss: {
-          plugins: [require("tailwindcss"), require("autoprefixer")],
+          plugins: [
+            require("tailwindcss"),
+            require("autoprefixer")
+          ],
         },
       }),
       compilerOptions: {
         dev: !production,
       },
     }),
-    css({ output: "bundle.css" }),
+    css({
+      output: "bundle.css"
+    }),
     resolve({
       browser: true,
       dedupe: ["svelte"],
@@ -75,7 +80,14 @@ export default {
       sourceMap: !production,
       inlineSources: !production,
     }),
-    !production && serve(),
+    !production && dev({
+      dirs: ['public'],
+      spa: 'public/index.html',
+      port: 5000,
+      proxy: {
+        '/api/*': ['localhost:3000']
+      },
+    }),
     !production && livereload("public"),
     production && terser(),
   ],

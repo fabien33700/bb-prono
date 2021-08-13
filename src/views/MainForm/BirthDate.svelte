@@ -21,11 +21,11 @@
   import BlockOverlay from 'components/BlockOverlay.svelte'
 
   // Stores
-  import { birthDateTime, selectedPage } from 'stores/index'
+  import { birthDateTime, selectedPage } from 'src/stores'
 
   // Default values and settings
   const PageIndex = 1
-  import { DateOfTerm, MinTermDistance, MaxTermDistance } from 'config'
+  import { DateOfTerm, MinTermDistance, MaxTermDistance } from 'src/config'
 
 
   // Internal states & properties

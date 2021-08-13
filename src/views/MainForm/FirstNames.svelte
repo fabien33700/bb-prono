@@ -7,7 +7,7 @@
   import { formatFirstNames } from 'lib/FormatUtils';
 
   // Stores
-  import { firstNames, selectedPage } from 'stores/index'
+  import { firstNames, selectedPage } from 'src/stores'
 
   const PageIndex = 0
 

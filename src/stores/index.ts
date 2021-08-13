@@ -1,5 +1,6 @@
 import { Readable, writable } from 'svelte/store'
-import type { Range } from 'lib/NumberUtils'
+import type { Range } from 'src/lib/NumberUtils'
+import type { Prognostic } from 'src/model/prognostic'
 
 /**
  * Store for current selected page
@@ -41,7 +42,7 @@ export const author = writable<string>()
  *
  * @returns the store snapshot
  */
-export function snapshot() {
+export function snapshot(): Prognostic {
   return {
     firstNames: read(firstNames),
     birthDateTime: read(birthDateTime),
@@ -49,6 +50,7 @@ export function snapshot() {
     size: read(size),
     messageText: read(messageText),
     author: read(author),
+    submitDate: new Date(),
   }
 }
 

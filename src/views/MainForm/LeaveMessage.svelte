@@ -5,11 +5,11 @@
   import TextField from 'components/TextField.svelte'
 
   // Stores
-  import { messageText, author, selectedPage } from 'stores/index'
+  import { messageText, author, selectedPage } from 'src/stores'
 
   // Default values and settings
   const PageIndex = 4
-  import { MaxTextLength } from 'config'
+  import { MaxTextLength } from 'src/config'
 
   // Initializing store values
   $messageText ??= ''

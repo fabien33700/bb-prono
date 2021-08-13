@@ -57,3 +57,18 @@ export function formatLongDate(date: Date): string {
 export function formatLongDateTime(date: Date): string {
   return format(date, `EEEE d LLLL u 'à' H'h'mm`, { locale })
 }
+
+/**
+ * Parse an ISO 8601 date time string in a JavaScript date
+ *
+ * @param datetime the string of the datetime
+ * @returns the Date object
+ */
+export function parseISODateTime(datetime: string): Date {
+  if (!datetime?.trim?.()) return null
+
+  const timestamp = Date.parse(datetime)
+  if (isNaN(timestamp)) return null
+
+  return new Date(timestamp)
+}
