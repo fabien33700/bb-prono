@@ -12,10 +12,8 @@
 <Tailwind/>
 
 <main>
-  <div class="w-full md:w-3/5 mx-auto p-8">
-    <Router {url}>
-      <Route path="results" component="{ResultsTable}" />
-      <Route path="/" component="{MainForm}" />
-    </Router>
-  </div>
+  <Router {url}>
+    <Route path="results" component="{ResultsTable}" />
+    <Route path="/" component="{MainForm}" />
+  </Router>
 </main>

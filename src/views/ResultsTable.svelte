@@ -1,87 +1,56 @@
 <script lang="ts">
+  import { onMount } from 'svelte'
   import axios from 'axios'
+
   import type { Prognostic } from 'src/model/prognostic'
-  import { formatFirstNames, formatSizeRange, formatWeightRange } from 'lib/FormatUtils'
-  import { formatLongDateTime, parseISODateTime } from 'lib/DateUtils'
-  import { onMount } from 'svelte';
 
-  let promise: Promise<Prognostic[]> = Promise.resolve(null)
+  import TableHeader from 'views/ResultsTable/TableHeader.svelte'
+  import EmptyResults from 'views/ResultsTable/EmptyResults.svelte'
+  import Loading from 'views/ResultsTable/Loading.svelte'
+  import ResultLine from 'views/ResultsTable/ResultLine.svelte'
 
-  onMount(() => {
-    promise = fetchPrognostics()
-  })
+  let promise: Promise<Prognostic[]>
+
+  onMount(() => (promise = fetchPrognostics()))
 
   async function fetchPrognostics(): Promise<Prognostic[]> {
-    const response = await axios.get('/prognostics')
-    const parsedata = response.data.map((p) => ({
-      ...p,
-      birthDateTime: parseISODateTime(p.birthDateTime),
-      submitDate: parseISODateTime(p.submitDate),
-    }) as Prognostic)
-    console.log(parsedata);
-    return parsedata
+    try {
+      const response = await axios.get("/prognostics");
+      return response?.data ?? [];
+    } catch (e) {
+      console.log("error while fetching prognostics: ", e);
+      return [];
+    }
   }
-
 </script>
 
-<table class="table table-auto w-full">
-  <thead>
-    <tr>
-      <th>Auteur</th>
-      <th>Prénom(s)</th>
-      <th>Date/Heure de naissance</th>
-      <th>Poids</th>
-      <th>Taille</th>
-      <th>Message laissé</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#await promise}
-      <tr>
-        <td colspan="6">
-          <em>Chargement en cours ...</em>
-        </td>
-      </tr>
-    {:then prognostics}
-      {#if prognostics?.length > 0}
-        {#each prognostics as p}
-        <tr>
-          <td>
-            {p.author} le <em>{formatLongDateTime(p.submitDate)}</em>
-          </td>
-          <td>
-            {#if p?.firstNames}
-              {@html formatFirstNames(p.firstNames)}
+<div class="overflow-x-auto mx-auto w-full">
+  <div
+    class="min-w-screen min-h-screenflex items-center justify-center bg-gray-100 overflow-hidden"
+  >
+    <div class="w-full px-5">
+      <div class="bg-white shadow-md rounded my-6">
+        <table class="min-w-max w-full table-auto">
+          <thead>
+            <TableHeader />
+          </thead>
+          <tbody class="text-gray-600 text-sm">
+            {#if promise}
+            {#await promise}
+              <Loading/>
+            {:then prognostics}
+              {#if prognostics?.length > 0}
+                {#each prognostics as prognostic}
+                  <ResultLine {prognostic} />
+                {/each}
+              {:else}
+                <EmptyResults/>
+              {/if}
+            {/await}
             {/if}
-          </td>
-          <td>
-            {#if p?.birthDateTime}
-              {@html formatLongDateTime(p.birthDateTime)}
-            {/if}
-          </td>
-          <td>
-            {#if p?.weight}
-              {@html formatWeightRange(p.weight)}
-            {/if}
-          </td>
-          <td>
-            {#if p?.size}
-              {@html formatSizeRange(p.size)}
-            {/if}
-          </td>
-          <td>
-            {p?.messageText ?? ''}
-          </td>
-        </tr>
-        {/each}
-      {:else}
-        <tr>
-          <td colspan="6">
-            <em>Aucun résultat pour l'instant</em>
-          </td>
-        </tr>
-      {/if}
-    {/await}
-
-  </tbody>
-</table>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

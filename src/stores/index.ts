@@ -45,12 +45,11 @@ export const author = writable<string>()
 export function snapshot(): Prognostic {
   return {
     firstNames: read(firstNames),
-    birthDateTime: read(birthDateTime),
+    birthDateTime: read(birthDateTime).toISOString(),
     weight: read(weight),
     size: read(size),
     messageText: read(messageText),
     author: read(author),
-    submitDate: new Date(),
   }
 }
 

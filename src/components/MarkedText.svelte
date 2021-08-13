@@ -23,9 +23,14 @@
   export let maxLength: number = Infinity
 
   /**
+   * If the text is readonly, no edition mode
+   */
+  export let readonly: boolean = false
+
+  /**
    * The placeholder when the text is empty
    */
-  export let placeholder = 'Aucun texte. Cliquez ici pour entrer en édition.'
+  export let placeholder = ''
 
   // Default values and settings
   const validateKeys = ['Enter', /* 'NumpadEnter' */]
@@ -101,7 +106,7 @@
 
   // Reactive state
   // Focusing textarea when entering edition mode
-  $: if (edition) elementRef?.focus()
+  $: if (!readonly && edition) elementRef?.focus()
 </script>
 
 {#if edition}
@@ -122,7 +127,7 @@
 {:else}
   <div
     class="flex flex-row items-start"
-    on:click={() => edition = true}>
+    on:click={() => { if (!readonly) edition = true } }>
     <p class="flex-1">
       {#if nonEmptyOrWhitespace(text)}
         {@html formatText(text)}
@@ -130,10 +135,11 @@
         <div class="italic text-gray-800">{placeholder}</div>
       {/if}
     </p>
-    <span class="cursor-pointer text-xs ml-2">✏️</span>
+    {#if !readonly}<span class="cursor-pointer text-xs ml-2">✏️</span>{/if}
   </div>
-  <div class="text-xs italic border-t-2 mt-2">
-    Cliquez sur le texte pour passer en édition
-  </div>
-
+  {#if !readonly}
+    <div class="text-xs italic border-t-2 mt-2">
+      Cliquez sur le texte pour passer en édition
+    </div>
+  {/if}
 {/if}

@@ -31,6 +31,7 @@
   <div class="flex flex-col">
     <MarkedText
       bind:text={$messageText}
+      placeholder={"Aucun texte. Cliquez ici pour entrer en édition."}
       maxLength={MaxTextLength}
     />
   <div class="flex flex-row items-center ">

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import axios from 'axios'
   import { Link } from 'svelte-routing'
 
   // Views
@@ -8,21 +9,16 @@
   import Weight from 'views/MainForm/Weight.svelte'
   import LeaveMessage from 'views/MainForm/LeaveMessage.svelte'
 
-  import { snapshot } from 'src/stores'
+  import { reset, snapshot } from 'src/stores'
 
   // Internal state
   let submitted = false
   let promise: Promise<void> = Promise.resolve()
 
-  const wait = (delay: number) => new Promise(resolve => setTimeout(resolve, delay))
-
   async function sendResults(): Promise<void> {
-    const results = { ...snapshot(), submitDate: new Date() }
-    console.log('Résultats avant envoi : ', results)
-
-    // Simulates server response delay
-    const delay = (2 + Math.random() * 3) * 1_000
-    await wait(delay)
+    const results = snapshot()
+    await axios.post('/prognostics', results)
+    reset()
   }
 
   function submitForm() {
@@ -33,7 +29,7 @@
 
 </script>
 
-<div class="shadow-md">
+<div class="w-full md:w-3/5 mx-auto p-8 shadow-md">
   <FirstNames />
   <BirthDate />
   <Weight />

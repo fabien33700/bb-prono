@@ -10,6 +10,7 @@ const Prognostic = model('Prognostic', new Schema({
   birthDate: { type: Date },
   weight: { type: Array },
   size: { type: Array },
+  messageText: { type: String },
   author: { type: String, required: true },
   submitDate: { type: Date, required: true },
 }))
@@ -23,7 +24,9 @@ function mountRouter(app) {
   })
 
   router.post('/', async (req, res) => {
-    await Prognostic.create(req.body)
+    const body = req.body
+    body.submitDate = new Date()
+    await Prognostic.create(body)
     res.status(201).end()
   })
 
