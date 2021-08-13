@@ -31,13 +31,6 @@
     handleFormatter: formatWeight,
   }
 
-  const middle = MinWeight + (MaxWeight - MinWeight) / 2
-  // Internal state
-  $weight = [
-    middle - (MaxWeightRange / 2),
-    middle + (MaxWeightRange / 2),
-  ]
-
   // Reactive state
   $: valid = !MaxWeightRange || ($weight[1] - $weight[0] <= MaxWeightRange)
   $: lightColor = valid ? 'hsl(134, 61%, 50%)' : 'hsl(0, 61%, 50%)'

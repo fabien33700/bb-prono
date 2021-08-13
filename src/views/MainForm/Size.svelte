@@ -26,13 +26,6 @@
     handleFormatter: (v: number) => `${v} cm`,
   }
 
-  const middle = MinSize + (MaxSize - MinSize) / 2
-  // Internal state
-  $size = [
-    middle - (MaxSizeRange / 2),
-    middle + (MaxSizeRange / 2),
-  ]
-
   // Reactive state
   $: valid = !MaxSizeRange || ($size[1] - $size[0] <= MaxSizeRange)
   $: lightColor = valid ? 'hsl(134, 61%, 50%)' : 'hsl(0, 61%, 50%)'

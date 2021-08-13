@@ -11,9 +11,9 @@
   const PageIndex = 4
   import { MaxTextLength } from 'src/config'
 
-  // Initializing store values
-  $messageText ??= ''
-  $author ??= ''
+  // // Initializing store values
+  // $messageText ??= ''
+  // $author ??= ''
 
   // Reactive state
   $: remaining = MaxTextLength - $messageText.length
