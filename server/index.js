@@ -4,10 +4,11 @@ const { connect, Schema, model } = require('mongoose')
 
 const port = 3000
 const connectUrl = 'mongodb://localhost:27017/bbprono'
+// const connectUrl = 'mongodb://bb-prono_mongodb_1:27017/bbprono'
 
 const Prognostic = model('Prognostic', new Schema({
   firstNames: { type: Array },
-  birthDate: { type: Date },
+  birthDateTime: { type: Date },
   weight: { type: Array },
   size: { type: Array },
   messageText: { type: String },
@@ -24,9 +25,11 @@ function mountRouter(app) {
   })
 
   router.post('/', async (req, res) => {
-    const body = req.body
-    body.submitDate = new Date()
-    await Prognostic.create(body)
+    const prognostic = {
+      ...req.body,
+      submitDate: new Date(),
+    }
+    await Prognostic.create(prognostic)
     res.status(201).end()
   })
 
