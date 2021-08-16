@@ -9,10 +9,9 @@
   import Weight from 'views/MainForm/Weight.svelte'
   import LeaveMessage from 'views/MainForm/LeaveMessage.svelte'
 
-  import { reset, snapshot } from 'src/stores'
+  import { reset, snapshot, author } from 'src/stores'
 
   // Internal state
-  let submitted = false
   let promise: Promise<void> = Promise.resolve()
 
   async function sendResults(): Promise<void> {
@@ -22,7 +21,6 @@
   }
 
   function submitForm() {
-    submitted = true
     promise = sendResults()
       .then(() => alert('Vos pronostics ont bien été pris en compte. Merci 🙂'))
   }
@@ -49,7 +47,7 @@
         ⏳ En cours ...
       </button>
       {:then}
-      <button class="success" disabled={submitted}
+      <button class="success" disabled={$author?.length === 0 }
         on:click={() => submitForm()}>
         Envoyer pronostic
       </button>

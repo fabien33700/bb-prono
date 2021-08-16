@@ -35,7 +35,7 @@
       maxLength={MaxTextLength}
     />
   <div class="flex flex-row items-center ">
-    <span class="mr-2 pt-2">Signé : </span>
+    <span class="mr-2 pt-2">Signé <sup>*</sup>: </span>
     <TextField
       width={'180px'}
       bind:value={$author}
@@ -43,5 +43,8 @@
     />
     <div class="flex-1"/>
   </div>
+  <legend class="text-xs italic">
+    <sup>*</sup> : requis
+  </legend>
 </div>
 </Accordion>
