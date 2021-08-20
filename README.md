@@ -1,10 +1,13 @@
-# Svelte TypeScript Tailwindcss Setup
+# bb-prono
+## Faites vos jeux pour l'arrivée du bébé
 
-svelte template based on the default svelte/template with enabled typescript and tailwindcss support.
+```![capture](https://user-images.githubusercontent.com/14042935/130292779-7f17ce85-b651-4386-a7bc-8e589030dfbd.jpg)
+
+Lancement rapide : 
 
 ```bash
-npx degit munxar/svelte-template my-svelte-project
-cd my-svelte-project
+git clone ...
+cd bb-prono
 npm i
 npm run dev
-```
+
